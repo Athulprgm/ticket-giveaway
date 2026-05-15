@@ -241,18 +241,13 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             <p className="text-zinc-600 text-lg">ബുക്ക്മൈഷോയിൽ ഈ വൗച്ചർ എങ്ങനെ ഉപയോഗിക്കാം</p>
           </div>
 
-          <div className="w-full overflow-x-auto pb-8 mb-8 custom-scrollbar">
-            <div className="min-w-[800px] w-full flex justify-center">
-              <img src="/bms_tutorial.png" alt="BookMyShow Tutorial" className="w-full max-w-5xl h-auto object-contain drop-shadow-2xl rounded-[2rem]" />
-            </div>
-          </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             
             {/* Step 1 */}
-            <div className="flex flex-col text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">1</div>
+            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
+              <img src="/step1_mockup.jpg" alt="Step 1: Select Seats" className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8" />
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">1</div>
                 <h4 className="text-lg font-semibold text-zinc-900">Select Your Seats</h4>
               </div>
               <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
@@ -264,9 +259,10 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">2</div>
+            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
+              <img src="/step2_mockup.jpg" alt="Step 2: Confirm Booking" className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8" />
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">2</div>
                 <h4 className="text-lg font-semibold text-zinc-900">Confirm Booking</h4>
               </div>
               <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
@@ -278,13 +274,14 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">3</div>
+            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
+              <img src="/step3_mockup.jpg" alt="Step 3: Select Gift Voucher" className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8" />
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">3</div>
                 <h4 className="text-lg font-semibold text-zinc-900">Select Gift Voucher</h4>
               </div>
               <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
-                On the payment screen, select "Gift Voucher" from other payment options.
+                On the payment screen, select "Gift Voucher" from other options.
               </p>
               <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
                 പേയ്‌മെന്റ് ഓപ്ഷനുകളിൽ നിന്ന് "Gift Voucher" തിരഞ്ഞെടുക്കുക.
@@ -292,9 +289,10 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 4 */}
-            <div className="flex flex-col text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">4</div>
+            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
+              <img src="/step4_mockup.jpg" alt="Step 4: Enter Code" className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8" />
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">4</div>
                 <h4 className="text-lg font-semibold text-zinc-900">Enter Code</h4>
               </div>
               <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
