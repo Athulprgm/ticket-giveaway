@@ -1,4 +1,5 @@
 const comments = [
+  { username: "fr.j4ideep", text: "@sreehari.c_" },
   { username: "ashwan_.thh", text: "@sayooj_surendran_14" },
   { username: "sangee.thh", text: "@saraan.gg" },
   { username: "s_neha_j_ithin", text: "@_.anagha.aa_" },
@@ -22,7 +23,7 @@ const comments = [
   { username: "adhhiii.in", text: "@_kann_anz" },
   { username: "abh.n__", text: "@aromalll_pvtt" },
   { username: "abhijith.5502", text: "@a_d_h_i__k_v" },
-  { username: "sayooj_surendran_", text: "@aswan_.thh real comments" }
+  { username: "sayooj_surendran_", text: "@aswan_.thh" }
 ];
 
 export default comments;
