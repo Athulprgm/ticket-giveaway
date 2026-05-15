@@ -20,43 +20,6 @@ const MANUAL_CODES = {
   comment: "TRWB400",  // <--- UPDATE THIS WITH REAL VOUCHER CODE
 };
 
-const PhoneMockup = ({ src, alt, stepNumber, hidePersonalData }) => {
-  return (
-    <div className="relative mx-auto w-full max-w-[240px] aspect-[9/19] bg-zinc-900 rounded-[2.5rem] p-2 sm:p-2.5 shadow-2xl border-[4px] border-zinc-800 flex-shrink-0">
-      {/* Phone Notch/Dynamic Island */}
-      <div className="absolute top-2.5 inset-x-0 h-5 flex justify-center z-30">
-        <div className="w-[30%] h-4 bg-zinc-900 rounded-full"></div>
-      </div>
-      
-      {/* Screen */}
-      <div className="relative w-full h-full bg-zinc-100 rounded-[2rem] overflow-hidden">
-        
-        {/* Step Badge */}
-        <div className="absolute top-4 left-4 bg-[#C7E23A] text-[#020B3D] w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shadow-md z-40">
-          {stepNumber}
-        </div>
-
-        {/* The Image - Scaled and translated to crop the top status bar */}
-        <div className="w-full absolute left-0" style={{ top: '-4%', height: '104%' }}>
-           <img src={src} alt={alt} className="w-full h-full object-cover object-top" />
-        </div>
-
-        {/* Dummy Data Overlay to perfectly cover personal info on Confirm Booking screen */}
-        {hidePersonalData && (
-          <div className="absolute bottom-[24%] left-0 w-full h-[12%] bg-[#f8fafc] z-20 flex flex-col justify-center px-5 border-y border-zinc-200">
-            <div className="text-[9px] font-bold text-zinc-500 mb-1 uppercase tracking-wide">For Sending Booking Details</div>
-            <div className="text-[11px] font-medium text-zinc-900 flex items-center gap-1.5">
-              <span>+91-9876543210</span>
-              <span className="text-zinc-300">|</span>
-              <span className="truncate">winner@trawbit.com</span>
-            </div>
-            <div className="text-[9px] text-zinc-400 mt-0.5">Kerala (for GST purposes)</div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
 
 const VoucherCard = ({ winnerName, code }) => {
   const [copied, setCopied] = useState(false);
@@ -278,13 +241,21 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             <p className="text-zinc-600 text-lg">ബുക്ക്മൈഷോയിൽ ഈ വൗച്ചർ എങ്ങനെ ഉപയോഗിക്കാം</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="w-full overflow-x-auto pb-8 mb-8 custom-scrollbar">
+            <div className="min-w-[800px] w-full flex justify-center">
+              <img src="/bms_tutorial.png" alt="BookMyShow Tutorial" className="w-full max-w-5xl h-auto object-contain drop-shadow-2xl rounded-[2rem]" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             
             {/* Step 1 */}
-            <div className="flex flex-col items-center text-center">
-              <PhoneMockup src="/bms_4.jpg" alt="Step 1" stepNumber={1} hidePersonalData={false} />
-              <h4 className="text-lg font-semibold text-zinc-900 mt-6 mb-2">Select Your Seats</h4>
-              <p className="text-sm text-zinc-600 mb-3 leading-relaxed">
+            <div className="flex flex-col text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">1</div>
+                <h4 className="text-lg font-semibold text-zinc-900">Select Your Seats</h4>
+              </div>
+              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
                 Choose your movie and select your preferred seats.
               </p>
               <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
@@ -293,10 +264,12 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 2 */}
-            <div className="flex flex-col items-center text-center">
-              <PhoneMockup src="/bms_2.jpg" alt="Step 2" stepNumber={2} hidePersonalData={true} />
-              <h4 className="text-lg font-semibold text-zinc-900 mt-6 mb-2">Confirm Booking</h4>
-              <p className="text-sm text-zinc-600 mb-3 leading-relaxed">
+            <div className="flex flex-col text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">2</div>
+                <h4 className="text-lg font-semibold text-zinc-900">Confirm Booking</h4>
+              </div>
+              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
                 Review your details and proceed to the payment page.
               </p>
               <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
@@ -305,10 +278,12 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 3 */}
-            <div className="flex flex-col items-center text-center">
-              <PhoneMockup src="/bms_3.jpg" alt="Step 3" stepNumber={3} hidePersonalData={false} />
-              <h4 className="text-lg font-semibold text-zinc-900 mt-6 mb-2">Select Gift Voucher</h4>
-              <p className="text-sm text-zinc-600 mb-3 leading-relaxed">
+            <div className="flex flex-col text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">3</div>
+                <h4 className="text-lg font-semibold text-zinc-900">Select Gift Voucher</h4>
+              </div>
+              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
                 On the payment screen, select "Gift Voucher" from other payment options.
               </p>
               <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
@@ -317,10 +292,12 @@ const RedemptionPage = ({ winnerData, onBack }) => {
             </div>
 
             {/* Step 4 */}
-            <div className="flex flex-col items-center text-center">
-              <PhoneMockup src="/bms_1.jpg" alt="Step 4" stepNumber={4} hidePersonalData={false} />
-              <h4 className="text-lg font-semibold text-zinc-900 mt-6 mb-2">Enter Code</h4>
-              <p className="text-sm text-zinc-600 mb-3 leading-relaxed">
+            <div className="flex flex-col text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                <div className="bg-[#020B3D] text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shadow-md">4</div>
+                <h4 className="text-lg font-semibold text-zinc-900">Enter Code</h4>
+              </div>
+              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
                 Paste your copied code and click Apply to redeem your ticket.
               </p>
               <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
