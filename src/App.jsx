@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReelSelector from "./ReelSelector";
 import AnnouncementView from "./AnnouncementView";
+import Footer from "./Footer";
 import followers from "./followers";
 import comments from "./comments";
 import "./index.css";
@@ -374,22 +375,9 @@ export default function App() {
         </main>
       )}
 
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="px-8 py-6 border-t border-zinc-100 flex flex-col sm:flex-row justify-between text-[10px] font-semibold uppercase tracking-widest text-zinc-400 items-center gap-4 relative z-10"
-      >
-        <div>
-          Powered by <span className="text-zinc-900">Trawbit Technologies</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>
-            Total Selected:{" "}
-            <strong className="text-zinc-900">{winners.length}</strong>
-          </span>
-        </div>
-      </motion.footer>
+      {view !== "follower-announcement" && view !== "comment-announcement" && (
+        <Footer />
+      )}
 
       <AnimatePresence>
         {showModal && (

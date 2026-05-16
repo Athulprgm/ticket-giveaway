@@ -8,6 +8,7 @@ import {
   Clapperboard,
   Sparkles,
 } from "lucide-react";
+import Footer from "./Footer";
 import followers from "./followers";
 import comments from "./comments";
 
@@ -39,7 +40,7 @@ const RedemptionPage = ({ winnerData, onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F3EF] flex flex-col items-center py-12 md:py-20 px-4 md:px-10 overflow-x-hidden relative selection:bg-[#C6DB2A] selection:text-[#050B2B]">
+    <div className="min-h-screen w-full bg-[#F3F3EF] flex flex-col items-center pt-12 md:pt-20 overflow-x-hidden relative selection:bg-[#C6DB2A] selection:text-[#050B2B]">
       {/* Ambient Background */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#C6DB2A]/10 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -53,6 +54,7 @@ const RedemptionPage = ({ winnerData, onBack }) => {
       </motion.button>
 
       {/* Main Voucher */}
+      <div className="w-full max-w-5xl px-4 md:px-10 mx-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.96, y: 50 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -318,9 +320,10 @@ const RedemptionPage = ({ winnerData, onBack }) => {
           </div>
         </div>
       </motion.div>
+      </div>
 
       {/* Tutorial Section */}
-      <div className="w-full max-w-[1700px] mt-24 relative z-10">
+      <div className="w-full max-w-[1700px] mt-24 px-4 md:px-10 mx-auto relative z-10 mb-20">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h3 className="text-3xl md:text-5xl font-black text-[#050B2B] mb-6 tracking-tight">
             How to Redeem Your Voucher
@@ -442,6 +445,7 @@ const RedemptionPage = ({ winnerData, onBack }) => {
           </motion.div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
@@ -587,16 +591,17 @@ export default function AnnouncementView({ type }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center w-full px-4 md:px-6 py-12 bg-[#F3F3EF] overflow-y-auto selection:bg-[#C6DB2A] selection:text-[#050B2B]">
+    <div className="min-h-screen relative z-50 flex flex-col items-center justify-between w-full pt-12 bg-[#F3F3EF] overflow-x-hidden selection:bg-[#C6DB2A] selection:text-[#050B2B]">
       {/* Ambient Background */}
-      <div className="fixed top-0 left-0 w-[500px] h-[500px] bg-[#C6DB2A]/10 blur-[120px] rounded-full pointer-events-none"></div>
-      <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#7A0000]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#C6DB2A]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#7A0000]/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="relative z-10 w-full max-w-xl mx-auto flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-xl mx-auto flex flex-col items-center my-auto py-12 px-4 md:px-6">
         <img
           src="/Untitled-2-01.png"
           alt="Trawbit"
-          className="h-16 md:h-24 mb-10 opacity-90 brightness-0 scale-110"
+          className="h-20 md:h-32 mb-8 opacity-95 brightness-0"
+          style={{ transform: "scale(1.5)", transformOrigin: "center", marginBottom: "3.5rem" }}
         />
         <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#050B2B] mb-8 text-center">
           Official <span className="font-black">Announcement</span>
@@ -631,6 +636,7 @@ export default function AnnouncementView({ type }) {
           )}
         </motion.div>
       </div>
+      <Footer />
     </div>
   );
 }
