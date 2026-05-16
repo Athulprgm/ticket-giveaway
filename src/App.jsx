@@ -63,8 +63,12 @@ function MovieTicketModal({ winner, onClose }) {
                   Trawbit Giveaway Winner
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center bg-zinc-50">
-                <i className="fa-solid fa-crown text-xl text-zinc-900"></i>
+              <div className="w-14 h-14 rounded-full border border-zinc-200 flex items-center justify-center bg-zinc-50 overflow-hidden p-2.5 shadow-sm">
+                <img
+                  src="/Untitled-2-01.png"
+                  alt="Trawbit"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
 
@@ -242,7 +246,7 @@ export default function App() {
         <AnnouncementView type={view === "follower-announcement" ? "follower" : "comment"} />
       ) : view === "home" ? (
         <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-          <img src="/trawbit-logo.png" alt="Trawbit" className="h-8 opacity-20 grayscale" />
+          <img src="/Untitled-2-01.png" alt="Trawbit Technologies" className="h-10 opacity-30 grayscale" />
         </main>
       ) : !isAuthenticated ? (
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-12 max-w-sm mx-auto w-full relative z-10">
@@ -253,7 +257,12 @@ export default function App() {
             onSubmit={handleLogin}
             className="w-full bg-white p-8 border border-zinc-200 flex flex-col gap-6"
           >
-            <div className="text-center mb-2">
+            <div className="text-center mb-2 flex flex-col items-center">
+              <img
+                src="/Untitled-2-01.png"
+                alt="Trawbit"
+                className="h-8 mb-6 opacity-60 grayscale"
+              />
               <h2 className="text-xl font-semibold text-zinc-900 tracking-tight">
                 Admin Access
               </h2>
@@ -302,6 +311,11 @@ export default function App() {
         </main>
       ) : (
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-12 max-w-4xl mx-auto w-full relative z-10">
+          <img
+            src="/Untitled-2-01.png"
+            alt="Trawbit"
+            className="h-10 mb-10 opacity-30 grayscale"
+          />
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

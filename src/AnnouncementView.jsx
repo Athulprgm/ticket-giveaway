@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Gift,
+  Popcorn,
+  Ticket,
+  Armchair,
+  Clapperboard,
+  Sparkles,
+} from "lucide-react";
 import followers from "./followers";
 import comments from "./comments";
 
@@ -12,123 +20,429 @@ const CREDENTIALS = {
 // Manually update these after the random winner is selected
 const MANUAL_WINNERS = {
   follower: "Follower_Winner_Name", // <--- UPDATE THIS AFTER SELECTION
-  comment: "Comment_Winner_Name", // <--- UPDATE THIS AFTER SELECTION
+  comment: "Sruthi Santhosh", // <--- UPDATE THIS AFTER SELECTION
 };
 
 const MANUAL_CODES = {
   follower: "TRWB400", // <--- UPDATE THIS WITH REAL VOUCHER CODE
-  comment: "TRWB400", // <--- UPDATE THIS WITH REAL VOUCHER CODE
+  comment: "8W94YNC7QQ", // <--- UPDATE THIS WITH REAL VOUCHER CODE
 };
 
-const VoucherCard = ({ winnerName, code }) => {
+const RedemptionPage = ({ winnerData, onBack }) => {
   const [copied, setCopied] = useState(false);
+  const voucherCode = winnerData.code;
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
+    navigator.clipboard.writeText(voucherCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const cutoutBg = "bg-[#f8fafc]";
-
   return (
-    <motion.div
-      initial={{ scale: 0.9, opacity: 0, y: 20 }}
-      animate={{ scale: 1, opacity: 1, y: 0 }}
-      className="relative bg-gradient-to-br from-[#020B3D] to-[#051352] text-white rounded-3xl w-full max-w-3xl mx-auto overflow-hidden shadow-2xl border border-[#C7E23A]/20"
-    >
-      {/* Premium background effects */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_0%,_rgba(199,226,58,0.15),_transparent_50%)] pointer-events-none"></div>
-      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_100%,_rgba(199,226,58,0.05),_transparent_50%)] pointer-events-none"></div>
+    <div className="min-h-screen bg-[#F3F3EF] flex flex-col items-center py-12 md:py-20 px-4 md:px-10 overflow-x-hidden relative selection:bg-[#C6DB2A] selection:text-[#050B2B]">
+      {/* Ambient Background */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#C6DB2A]/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="absolute -bottom-10 -left-10 opacity-[0.04] pointer-events-none grayscale scale-110">
-        <img src="/trawbit-logo.png" alt="" className="w-64" />
-      </div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#7A0000]/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="flex flex-col md:flex-row relative z-10">
-        {/* Left Section */}
-        <div className="w-full md:w-[70%] p-6 md:p-10 flex flex-col justify-between">
-          <div className="mb-8 md:mb-10">
-            <div className="flex items-center gap-3 mb-6">
-              <img
-                src="/trawbit-logo.png"
-                alt="Trawbit Technologies"
-                className="h-4 md:h-5 object-contain brightness-0 invert"
-              />
+      <motion.button
+        onClick={onBack}
+        className="absolute top-6 left-6 md:top-10 md:left-10 z-50 text-black/40 hover:text-[#050B2B] font-black uppercase tracking-widest text-xs md:text-sm transition-colors bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-black/5"
+      >
+        &larr; Back
+      </motion.button>
+
+      {/* Main Voucher */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96, y: 50 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          duration: 0.6,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        className="relative w-full max-w-5xl rounded-[38px] overflow-hidden bg-white border border-black/5 shadow-[0_20px_80px_rgba(0,0,0,0.12)] mt-12 md:mt-0 flex flex-col lg:flex-row lg:items-stretch"
+      >
+        {/* Background Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(198,219,42,0.12),transparent_35%)]"></div>
+
+        <div className="flex flex-col lg:flex-row w-full relative z-10 lg:items-stretch">
+          {/* LEFT SECTION */}
+          <div className="relative flex-1 bg-[#FAFAF7] overflow-hidden">
+            {/* Ticket Cut */}
+            <div className="hidden lg:block absolute top-1/2 -right-5 -translate-y-1/2 w-10 h-10 rounded-full bg-[#F3F3EF] z-20"></div>
+
+            {/* Decorative Dots */}
+            <div className="absolute left-0 top-20 opacity-20">
+              <div className="grid grid-cols-7 gap-2">
+                {Array.from({ length: 70 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 rounded-full bg-[#C6DB2A]"
+                  ></div>
+                ))}
+              </div>
             </div>
 
-            <h1
-              className="text-2xl md:text-4xl lg:text-5xl font-semibold text-[#C7E23A] tracking-[0.15em] md:tracking-[0.2em] uppercase leading-tight mb-2"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              GIFT VOUCHER
-            </h1>
-            <p className="text-sm md:text-lg text-white/70">
-              BookMyShow Entertainment Pass
-            </p>
+            {/* Floating Icons */}
+            <div className="absolute left-10 bottom-48 opacity-[0.08]">
+              <Clapperboard size={110} strokeWidth={1} />
+            </div>
+
+            <div className="absolute left-52 bottom-20 opacity-[0.08]">
+              <Popcorn size={100} strokeWidth={1} />
+            </div>
+
+            <div className="absolute right-56 bottom-20 opacity-[0.08]">
+              <Armchair size={100} strokeWidth={1} />
+            </div>
+
+            <div className="absolute right-20 top-44 opacity-[0.08]">
+              <Sparkles size={80} strokeWidth={1} />
+            </div>
+
+            <div className="relative z-10 px-8 md:px-10 pt-10 lg:pt-14 pb-32 lg:pb-36 h-full flex flex-col justify-center">
+              {/* HEADER */}
+              <div className="flex flex-wrap items-center justify-between lg:justify-start gap-3 lg:gap-6 w-full">
+                <div className="flex items-center">
+                  <img
+                    src="/Untitled-2-01.png"
+                    alt="Trawbit"
+                    className="h-10 lg:h-28 object-contain brightness-0 opacity-90 scale-[1.3] lg:scale-[1.4] origin-left ml-2 lg:ml-4"
+                  />
+                </div>
+
+                <div className="text-lg lg:text-2xl text-black/30 font-light">×</div>
+
+                <div className="flex items-center">
+                  <img
+                    src="/bms-logo.png"
+                    alt="BookMyShow"
+                    className="h-5 lg:h-8 object-contain brightness-0 opacity-90"
+                  />
+                </div>
+              </div>
+
+              {/* TITLE */}
+              <div className="mt-8 lg:mt-10 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="leading-[0.95]"
+                >
+                  <span className="block text-[#050B2B] text-[40px] lg:text-[60px] font-black tracking-[-0.05em]">
+                    TICKET
+                  </span>
+
+                  <span className="block text-[#C6DB2A] text-[40px] lg:text-[60px] font-black tracking-[-0.05em]">
+                    GIVEAWAY
+                  </span>
+                </motion.h1>
+
+                {/* Divider */}
+                <div className="flex items-center justify-center lg:justify-start gap-4 mt-6 w-full lg:w-auto">
+                  <div className="h-[2px] w-12 lg:w-24 bg-[#C6DB2A]/30"></div>
+                  <div className="w-3 h-3 rounded-full bg-[#C6DB2A] shadow-[0_0_15px_rgba(198,219,42,0.4)]"></div>
+                  <div className="h-[2px] w-24 lg:w-48 bg-[#C6DB2A]/30"></div>
+                </div>
+
+                {/* Subtitle */}
+                <p className="mt-4 text-[#050B2B] text-[10px] lg:text-base tracking-[0.2em] uppercase font-bold text-center lg:text-left w-full">
+                  Enjoy Movies. Create Memories.
+                </p>
+                <div className="mt-6 flex flex-col items-center lg:items-start gap-3 w-full">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-center lg:justify-start gap-2 sm:gap-4 w-full lg:w-auto">
+                    <p className="text-[10px] lg:text-xs font-bold text-black/40 uppercase tracking-widest text-center lg:text-left">
+                      Presented To:
+                    </p>
+                    <p className="text-base lg:text-xl font-black text-[#050B2B] tracking-wide bg-[#C6DB2A]/20 px-4 py-1.5 rounded-xl border border-[#C6DB2A]/30 text-center inline-block">
+                      {winnerData.name}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Features Strip */}
+            <div className="absolute bottom-0 left-0 w-full bg-[#C6DB2A] px-4 lg:px-10 py-3 lg:py-6 flex items-center min-h-[60px] lg:h-[85px]">
+              <div className="flex justify-between items-center w-full gap-2 lg:gap-8">
+                {/* ITEM */}
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl bg-white/30 backdrop-blur-md flex items-center justify-center shrink-0">
+                    <Ticket className="w-4 h-4 lg:w-6 lg:h-6 text-[#050B2B]" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3 className="text-[#050B2B] font-black uppercase text-[8px] lg:text-base leading-tight">Your Ticket</h3>
+                    <p className="text-[#050B2B]/80 uppercase tracking-wide text-[6px] lg:text-xs hidden sm:block">To Entertainment</p>
+                  </div>
+                </div>
+
+                {/* ITEM */}
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl bg-white/30 backdrop-blur-md flex items-center justify-center shrink-0">
+                    <Popcorn className="w-4 h-4 lg:w-6 lg:h-6 text-[#050B2B]" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3 className="text-[#050B2B] font-black uppercase text-[8px] lg:text-base leading-tight">Movies. Events.</h3>
+                    <p className="text-[#050B2B]/80 uppercase tracking-wide text-[6px] lg:text-xs hidden sm:block">Experiences.</p>
+                  </div>
+                </div>
+
+                {/* ITEM */}
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl bg-white/30 backdrop-blur-md flex items-center justify-center shrink-0">
+                    <Armchair className="w-4 h-4 lg:w-6 lg:h-6 text-[#050B2B]" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3 className="text-[#050B2B] font-black uppercase text-[8px] lg:text-base leading-tight">Any Movie.</h3>
+                    <p className="text-[#050B2B]/80 uppercase tracking-wide text-[6px] lg:text-xs hidden sm:block">Any Show.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="w-16 h-[1px] bg-[#C7E23A]/30 mb-6"></div>
+          {/* RIGHT SECTION */}
+          <div className="relative w-full lg:w-[360px] bg-gradient-to-br from-[#B10000] via-[#920000] to-[#570000] overflow-hidden shrink-0 border-t-2 lg:border-t-0 border-dashed border-white/20 lg:border-transparent">
+            {/* Ticket Cut */}
+            <div className="hidden lg:block absolute top-1/2 -left-5 -translate-y-1/2 w-10 h-10 rounded-full bg-[#F3F3EF] z-20"></div>
 
-          <div>
-            <p className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mb-1">
-              Presented to
-            </p>
-            <p className="text-xl md:text-3xl font-medium text-white tracking-tight">
-              {winnerName}
-            </p>
+            {/* Cinema Texture */}
+            <div className="absolute bottom-0 inset-x-0 opacity-[0.08]">
+              <div className="h-60 bg-[radial-gradient(circle,#ffffff_20%,transparent_21%)] bg-[size:40px_40px]"></div>
+            </div>
+
+            {/* Ambient Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_60%)]"></div>
+
+            <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 lg:px-10 py-8 lg:py-0 text-white">
+              {/* TOP */}
+              <div className="w-full text-center">
+                <p className="uppercase tracking-[0.3em] text-[10px] text-white/90">
+                  Gift Voucher
+                </p>
+
+                <div className="flex items-center gap-4 my-4">
+                  <div className="h-[1px] flex-1 bg-white/30"></div>
+                  <div className="w-2 h-2 rounded-full bg-white"></div>
+                  <div className="h-[1px] flex-1 bg-white/30"></div>
+                </div>
+
+                {/* Amount */}
+                <div className="flex justify-center items-start">
+                  <span className="text-3xl lg:text-4xl mt-2 font-light">₹</span>
+                  <span className="text-[70px] lg:text-[85px] font-black leading-none tracking-[-0.05em]">
+                    400
+                  </span>
+                </div>
+
+                <p className="mt-2 uppercase tracking-[0.15em] text-[10px] lg:text-xs text-white/90">
+                  Four Hundred Rupees Only
+                </p>
+              </div>
+
+              {/* CODE BOX */}
+              <div className="w-full mt-6">
+                <div className="border border-dashed border-white/40 rounded-[16px] px-5 py-4 bg-white/5 backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                  <p className="uppercase text-center text-[9px] tracking-[0.3em] text-white/60 mb-2">
+                    Voucher Code
+                  </p>
+                  <p className="text-center font-mono text-xl lg:text-2xl tracking-[0.15em] font-bold select-all">
+                    {voucherCode}
+                  </p>
+                </div>
+                
+                <button
+                  onClick={handleCopy}
+                  className="relative w-full overflow-hidden group/btn rounded-xl mt-3"
+                >
+                  <div className="absolute inset-0 bg-white transition-transform duration-300 group-hover/btn:scale-105"></div>
+                  <div className="relative px-4 py-2.5 flex items-center justify-center gap-2">
+                    <span className="text-[10px] lg:text-xs font-black text-[#570000] uppercase tracking-widest z-10">
+                      {copied ? "Copied!" : "Copy Code"}
+                    </span>
+                    {!copied && (
+                      <svg className="w-3.5 h-3.5 text-[#570000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    )}
+                  </div>
+                </button>
+              </div>
+
+              {/* FOOTER */}
+              <div className="flex items-center justify-center gap-3 mt-6 w-full">
+                <div className="w-10 h-10 rounded-xl border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center shrink-0">
+                  <Gift size={18} />
+                </div>
+                <div>
+                  <p className="uppercase tracking-[0.1em] text-[8px] text-white/90 leading-relaxed">
+                    Thank You For Being
+                    <br />A Part Of Our Journey
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Desktop Divider */}
-        <div className="hidden md:flex flex-col justify-center items-center relative w-0">
-          <div
-            className={`absolute top-[-20px] left-[-16px] w-8 h-8 ${cutoutBg} rounded-full z-20 shadow-inner border border-[#C7E23A]/10`}
-          ></div>
-          <div className="w-[1px] h-full border-l-[2px] border-dashed border-white/20 absolute left-[-0.5px]"></div>
-          <div
-            className={`absolute bottom-[-20px] left-[-16px] w-8 h-8 ${cutoutBg} rounded-full z-20 shadow-inner border border-[#C7E23A]/10`}
-          ></div>
-        </div>
+        {/* FOOTER TERMS */}
+        <div className="bg-white border-t border-black/5 px-8 md:px-14 py-7">
+          <div className="flex flex-wrap items-center gap-5 text-sm text-black/70">
+            {/* Badge */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl border border-[#C6DB2A]/30 flex items-center justify-center bg-[#C6DB2A]/10">
+                <svg
+                  className="w-5 h-5 text-[#C6DB2A]"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
 
-        {/* Mobile Divider */}
-        <div className="flex md:hidden w-full items-center justify-center relative h-0">
-          <div
-            className={`absolute left-[-20px] top-[-16px] w-8 h-8 ${cutoutBg} rounded-full z-20 shadow-inner border border-[#C7E23A]/10`}
-          ></div>
-          <div className="w-full border-t-[2px] border-dashed border-white/20 absolute top-[-0.5px]"></div>
-          <div
-            className={`absolute right-[-20px] top-[-16px] w-8 h-8 ${cutoutBg} rounded-full z-20 shadow-inner border border-[#C7E23A]/10`}
-          ></div>
-        </div>
-
-        {/* Right Section */}
-        <div className="w-full md:w-[30%] p-6 md:p-8 flex flex-col justify-center items-center md:items-end text-right relative bg-black/10">
-          <div className="mb-6 w-full">
-            <h2 className="text-4xl md:text-6xl font-bold text-[#C7E23A] leading-none mb-1 text-center md:text-right">
-              <span className="text-2xl md:text-3xl align-top mr-1">₹</span>400
-            </h2>
-            <p className="text-[10px] md:text-xs text-white/60 tracking-widest uppercase text-center md:text-right">
-              Value
-            </p>
-          </div>
-
-          <div className="w-full flex flex-col items-center md:items-end">
-            <div className="border border-[#C7E23A]/30 px-4 py-2 md:py-3 rounded md:rounded-md mb-4 w-full text-center bg-black/30 backdrop-blur-sm">
-              <span className="font-mono text-base md:text-xl tracking-widest text-white select-all">
-                {code}
+              <span className="font-bold uppercase tracking-[0.15em]">
+                Terms & Conditions
               </span>
             </div>
 
-            <button
-              onClick={handleCopy}
-              className="text-[10px] font-bold bg-[#C7E23A] text-[#020B3D] hover:bg-[#9FBF2E] px-5 py-2.5 rounded uppercase tracking-widest transition-all active:scale-95 w-full shadow-lg shadow-[#C7E23A]/10"
-            >
-              {copied ? "COPIED TO CLIPBOARD" : "COPY CODE"}
-            </button>
+            <div className="h-5 w-[1px] bg-black/10"></div>
+
+            <p>Valid only on BookMyShow.</p>
+
+            <p>Not valid on gift cards.</p>
+
+            <p>No cash redemption.</p>
           </div>
         </div>
+      </motion.div>
+
+      {/* Tutorial Section */}
+      <div className="w-full max-w-[1700px] mt-24 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h3 className="text-3xl md:text-5xl font-black text-[#050B2B] mb-6 tracking-tight">
+            How to Redeem Your Voucher
+          </h3>
+          <p className="text-[#050B2B] text-xl font-medium bg-[#C6DB2A]/20 inline-block px-6 py-2 rounded-full border border-[#C6DB2A]/30">
+            ബുക്ക്മൈഷോയിൽ ഈ വൗച്ചർ എങ്ങനെ ഉപയോഗിക്കാം
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Step 1 */}
+          <motion.div
+            whileHover={{ y: -10 }}
+            className="flex flex-col items-center text-center bg-white rounded-[2rem] p-8 border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.05)] relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,219,42,0.1),transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="bg-[#F3F3EF] p-4 rounded-2xl mb-8 w-full flex items-center justify-center border border-black/5 shadow-inner min-h-[180px]">
+              <img
+                src="/step1_mockup.jpg"
+                alt="Step 1: Select Seats"
+                className="w-full h-full object-contain rounded-xl drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex items-center justify-center gap-3 mb-4 w-full relative z-10">
+              <div className="bg-[#C6DB2A] text-[#050B2B] w-8 h-8 rounded-full flex items-center justify-center font-black text-sm shadow-md shadow-[#C6DB2A]/40">
+                1
+              </div>
+              <h4 className="text-xl font-bold text-[#050B2B]">Select Seats</h4>
+            </div>
+            <p className="text-sm text-black/60 mb-4 leading-relaxed font-medium relative z-10">
+              Choose your movie and select your preferred seats.
+            </p>
+            <p className="text-sm text-[#050B2B] font-bold leading-relaxed bg-[#C6DB2A]/10 w-full py-2.5 rounded-xl border border-[#C6DB2A]/20 relative z-10">
+              സിനിമയും സീറ്റുകളും തിരഞ്ഞെടുക്കുക.
+            </p>
+          </motion.div>
+
+          {/* Step 2 */}
+          <motion.div
+            whileHover={{ y: -10 }}
+            className="flex flex-col items-center text-center bg-white rounded-[2rem] p-8 border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.05)] relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,219,42,0.1),transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="bg-[#F3F3EF] p-4 rounded-2xl mb-8 w-full flex items-center justify-center border border-black/5 shadow-inner min-h-[180px]">
+              <img
+                src="/step2_mockup.jpg"
+                alt="Step 2: Confirm Booking"
+                className="w-full h-full object-contain rounded-xl drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex items-center justify-center gap-3 mb-4 w-full relative z-10">
+              <div className="bg-[#C6DB2A] text-[#050B2B] w-8 h-8 rounded-full flex items-center justify-center font-black text-sm shadow-md shadow-[#C6DB2A]/40">
+                2
+              </div>
+              <h4 className="text-xl font-bold text-[#050B2B]">
+                Confirm Booking
+              </h4>
+            </div>
+            <p className="text-sm text-black/60 mb-4 leading-relaxed font-medium relative z-10">
+              Review your details and proceed to the payment page.
+            </p>
+            <p className="text-sm text-[#050B2B] font-bold leading-relaxed bg-[#C6DB2A]/10 w-full py-2.5 rounded-xl border border-[#C6DB2A]/20 relative z-10">
+              വിവരങ്ങൾ പരിശോധിച്ച് പേയ്‌മെൻ്റിലേക്ക് പോവുക.
+            </p>
+          </motion.div>
+
+          {/* Step 3 */}
+          <motion.div
+            whileHover={{ y: -10 }}
+            className="flex flex-col items-center text-center bg-white rounded-[2rem] p-8 border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.05)] relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,219,42,0.1),transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="bg-[#F3F3EF] p-4 rounded-2xl mb-8 w-full flex items-center justify-center border border-black/5 shadow-inner min-h-[180px]">
+              <img
+                src="/step3_mockup.jpg"
+                alt="Step 3: Select Gift Voucher"
+                className="w-full h-full object-contain rounded-xl drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex items-center justify-center gap-3 mb-4 w-full relative z-10">
+              <div className="bg-[#C6DB2A] text-[#050B2B] w-8 h-8 rounded-full flex items-center justify-center font-black text-sm shadow-md shadow-[#C6DB2A]/40">
+                3
+              </div>
+              <h4 className="text-xl font-bold text-[#050B2B]">Gift Voucher</h4>
+            </div>
+            <p className="text-sm text-black/60 mb-4 leading-relaxed font-medium relative z-10">
+              On the payment screen, select "Gift Voucher".
+            </p>
+            <p className="text-sm text-[#050B2B] font-bold leading-relaxed bg-[#C6DB2A]/10 w-full py-2.5 rounded-xl border border-[#C6DB2A]/20 relative z-10">
+              "Gift Voucher" തിരഞ്ഞെടുക്കുക.
+            </p>
+          </motion.div>
+
+          {/* Step 4 */}
+          <motion.div
+            whileHover={{ y: -10 }}
+            className="flex flex-col items-center text-center bg-white rounded-[2rem] p-8 border border-black/5 shadow-[0_20px_60px_rgba(0,0,0,0.05)] relative overflow-hidden group"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,219,42,0.1),transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div className="bg-[#F3F3EF] p-4 rounded-2xl mb-8 w-full flex items-center justify-center border border-black/5 shadow-inner min-h-[180px]">
+              <img
+                src="/step4_mockup.jpg"
+                alt="Step 4: Enter Code"
+                className="w-full h-full object-contain rounded-xl drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="flex items-center justify-center gap-3 mb-4 w-full relative z-10">
+              <div className="bg-[#C6DB2A] text-[#050B2B] w-8 h-8 rounded-full flex items-center justify-center font-black text-sm shadow-md shadow-[#C6DB2A]/40">
+                4
+              </div>
+              <h4 className="text-xl font-bold text-[#050B2B]">Enter Code</h4>
+            </div>
+            <p className="text-sm text-black/60 mb-4 leading-relaxed font-medium relative z-10">
+              Paste your code and click Apply to redeem.
+            </p>
+            <p className="text-sm text-[#050B2B] font-bold leading-relaxed bg-[#C6DB2A]/10 w-full py-2.5 rounded-xl border border-[#C6DB2A]/20 relative z-10">
+              കോഡ് നൽകി Apply ക്ലിക്ക് ചെയ്യുക.
+            </p>
+          </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -153,14 +467,22 @@ const ClaimFlow = ({
       password.trim() === expectedPassword
     ) {
       setError("");
-      onSuccess({ name: winnerName, code: voucherCode });
+      onSuccess({ name: winnerName, code: voucherCode, text: commentText });
     } else {
       setError("Invalid username or password");
     }
   };
 
   return (
-    <div className="flex-1 w-full min-h-[350px] bg-white p-8 border border-zinc-200 flex flex-col items-center justify-center relative hover:shadow-xl transition-shadow duration-300 rounded-xl overflow-hidden">
+    <div className="flex-1 w-full min-h-[350px] bg-white rounded-[2rem] p-8 md:p-12 border border-black/5 flex flex-col items-center justify-center relative hover:shadow-[0_20px_60px_rgba(0,0,0,0.05)] transition-all duration-300 overflow-hidden group">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,219,42,0.1),transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+      <img
+        src="/Untitled-2-01.png"
+        alt="Trawbit"
+        className="h-6 opacity-20 grayscale absolute top-8 right-8"
+      />
+
       <AnimatePresence mode="wait">
         {step === "idle" && (
           <motion.div
@@ -168,22 +490,17 @@ const ClaimFlow = ({
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="flex flex-col items-center h-full w-full justify-center text-center"
+            className="flex flex-col items-center h-full w-full justify-center text-center relative z-10"
           >
-            <p className="text-[10px] font-semibold text-zinc-400 uppercase tracking-widest mb-6">
+            <p className="text-xs font-bold text-[#050B2B] uppercase tracking-[0.2em] mb-6 bg-[#C6DB2A]/20 px-4 py-1.5 rounded-full border border-[#C6DB2A]/30">
               {type === "follower" ? "Follower Winner" : "Comment Winner"}
             </p>
-            <p className="text-3xl md:text-4xl font-light text-zinc-900 tracking-tight mb-4 break-all">
-              @{winnerName}
+            <p className="text-3xl md:text-5xl font-black text-[#050B2B] tracking-tight mb-4 break-words">
+              {winnerName}
             </p>
-            {type === "comment" && commentText && (
-              <p className="text-sm text-zinc-500 font-light italic max-w-xs leading-relaxed mb-6">
-                "{commentText}"
-              </p>
-            )}
             <button
               onClick={() => setStep("login")}
-              className="mt-6 bg-[#020B3D] text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-[#041154] transition-colors shadow-lg shadow-[#020B3D]/20 active:scale-95"
+              className="mt-6 bg-[#050B2B] text-white px-8 py-4 rounded-xl text-sm font-bold hover:scale-105 transition-all shadow-[0_10px_30px_rgba(5,11,43,0.2)] active:scale-95 uppercase tracking-wider"
             >
               Claim Voucher
             </button>
@@ -196,20 +513,20 @@ const ClaimFlow = ({
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="flex flex-col items-center w-full max-w-xs"
+            className="flex flex-col items-center w-full max-w-xs relative z-10"
           >
-            <p className="text-lg font-semibold text-zinc-900 mb-6">
-              Claim Your Voucher
+            <p className="text-2xl font-black text-[#050B2B] mb-6">
+              Verify Identity
             </p>
 
-            <form onSubmit={handleLogin} className="w-full flex flex-col gap-3">
+            <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">
               <div>
                 <input
                   type="text"
                   placeholder="Enter Username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-sm outline-none focus:border-[#020B3D] focus:bg-white transition-all font-medium"
+                  className="w-full px-5 py-4 bg-[#F3F3EF] border border-black/5 rounded-xl text-sm outline-none focus:border-[#C6DB2A] focus:bg-white text-[#050B2B] transition-all font-medium placeholder:text-black/30"
                 />
               </div>
               <div>
@@ -218,26 +535,26 @@ const ClaimFlow = ({
                   placeholder="Enter Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-lg text-sm outline-none focus:border-[#020B3D] focus:bg-white transition-all font-medium"
+                  className="w-full px-5 py-4 bg-[#F3F3EF] border border-black/5 rounded-xl text-sm outline-none focus:border-[#C6DB2A] focus:bg-white text-[#050B2B] transition-all font-medium placeholder:text-black/30"
                 />
               </div>
               {error && (
-                <p className="text-red-500 text-xs font-medium text-center mt-1">
+                <p className="text-red-500 text-xs font-bold text-center mt-1">
                   {error}
                 </p>
               )}
               <button
                 type="submit"
-                className="bg-[#C7E23A] text-[#020B3D] font-bold px-4 py-3 rounded-lg text-sm hover:bg-[#9FBF2E] transition-colors w-full mt-2 shadow-lg shadow-[#C7E23A]/20 active:scale-95"
+                className="bg-[#C6DB2A] text-[#050B2B] font-black px-4 py-4 rounded-xl text-sm hover:scale-105 transition-all w-full mt-2 shadow-[0_10px_30px_rgba(198,219,42,0.3)] active:scale-95 uppercase tracking-wider"
               >
                 Reveal Voucher Code
               </button>
             </form>
             <button
               onClick={() => setStep("idle")}
-              className="mt-4 text-xs text-zinc-400 hover:text-zinc-600 font-medium transition-colors"
+              className="mt-6 text-xs text-black/40 hover:text-[#050B2B] font-bold uppercase tracking-widest transition-colors"
             >
-              Cancel
+              Cancel Verification
             </button>
           </motion.div>
         )}
@@ -246,145 +563,9 @@ const ClaimFlow = ({
   );
 };
 
-const RedemptionPage = ({ winnerData, onBack }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed inset-0 z-[100] bg-[#f8fafc] overflow-y-auto w-full h-full"
-    >
-      <div className="max-w-6xl mx-auto px-6 py-12 md:py-20">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-12">
-          <img src="/trawbit-logo.png" alt="Trawbit" className="h-8" />
-        </div>
-
-        {/* Voucher Section */}
-        <div className="mb-24">
-          <h2 className="text-3xl font-light text-zinc-900 mb-2">
-            Congratulations, {winnerData.name}!
-          </h2>
-          <p className="text-zinc-500 mb-10">
-            Here is your official BookMyShow Entertainment Pass.
-          </p>
-          <VoucherCard winnerName={winnerData.name} code={winnerData.code} />
-        </div>
-
-        {/* Tutorial Section */}
-        <div className="border-t border-zinc-200 pt-16 mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h3 className="text-3xl font-semibold text-zinc-900 mb-4">
-              How to Redeem Your Voucher
-            </h3>
-            <p className="text-zinc-600 text-lg">
-              ബുക്ക്മൈഷോയിൽ ഈ വൗച്ചർ എങ്ങനെ ഉപയോഗിക്കാം
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {/* Step 1 */}
-            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
-              <img
-                src="/step1_mockup.jpg"
-                alt="Step 1: Select Seats"
-                className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8"
-              />
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">
-                  1
-                </div>
-                <h4 className="text-lg font-semibold text-zinc-900">
-                  Select Your Seats
-                </h4>
-              </div>
-              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
-                Choose your movie and select your preferred seats.
-              </p>
-              <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
-                സിനിമയും സീറ്റുകളും തിരഞ്ഞെടുക്കുക.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
-              <img
-                src="/step2_mockup.jpg"
-                alt="Step 2: Confirm Booking"
-                className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8"
-              />
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">
-                  2
-                </div>
-                <h4 className="text-lg font-semibold text-zinc-900">
-                  Confirm Booking
-                </h4>
-              </div>
-              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
-                Review your details and proceed to the payment page.
-              </p>
-              <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
-                വിവരങ്ങൾ പരിശോധിച്ച് പേയ്‌മെൻ്റിലേക്ക് പോവുക.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
-              <img
-                src="/step3_mockup.jpg"
-                alt="Step 3: Select Gift Voucher"
-                className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8"
-              />
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">
-                  3
-                </div>
-                <h4 className="text-lg font-semibold text-zinc-900">
-                  Select Gift Voucher
-                </h4>
-              </div>
-              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
-                On the payment screen, select "Gift Voucher" from other options.
-              </p>
-              <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
-                പേയ്‌മെന്റ് ഓപ്ഷനുകളിൽ നിന്ന് "Gift Voucher" തിരഞ്ഞെടുക്കുക.
-              </p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex flex-col items-center text-center bg-zinc-50 rounded-3xl p-5 border border-zinc-100 shadow-sm">
-              <img
-                src="/step4_mockup.jpg"
-                alt="Step 4: Enter Code"
-                className="w-full max-w-[260px] h-auto object-contain drop-shadow-xl rounded-[2rem] mb-8"
-              />
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <div className="bg-[#020B3D] text-white w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm shadow-md">
-                  4
-                </div>
-                <h4 className="text-lg font-semibold text-zinc-900">
-                  Enter Code
-                </h4>
-              </div>
-              <p className="text-sm text-zinc-600 mb-2 leading-relaxed">
-                Paste your copied code and click Apply to redeem your ticket.
-              </p>
-              <p className="text-sm text-[#020B3D] font-medium leading-relaxed">
-                കോപ്പി ചെയ്ത കോഡ് നൽകി Apply ക്ലിക്ക് ചെയ്യുക.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 export default function AnnouncementView({ type }) {
   const [followerWinner, setFollowerWinner] = useState(null);
   const [commentWinner, setCommentWinner] = useState(null);
-
-  // New state to manage navigation to the redemption page
   const [loggedInWinner, setLoggedInWinner] = useState(null);
 
   useEffect(() => {
@@ -406,39 +587,50 @@ export default function AnnouncementView({ type }) {
   }
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center w-full px-6 py-12 relative z-10 bg-white">
-      <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-zinc-900 mb-12 text-center">
-        Official <span className="font-semibold">Announcement</span>
-      </h2>
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center w-full px-4 md:px-6 py-12 bg-[#F3F3EF] overflow-y-auto selection:bg-[#C6DB2A] selection:text-[#050B2B]">
+      {/* Ambient Background */}
+      <div className="fixed top-0 left-0 w-[500px] h-[500px] bg-[#C6DB2A]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-[#7A0000]/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 40, filter: "blur(20px)", scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col md:flex-row gap-6 w-full max-w-md mx-auto"
-      >
-        {type === "follower" && (
-          <ClaimFlow
-            type="follower"
-            winnerName={MANUAL_WINNERS.follower}
-            expectedUsername={CREDENTIALS.follower.user}
-            expectedPassword={CREDENTIALS.follower.pass}
-            voucherCode={MANUAL_CODES.follower}
-            onSuccess={setLoggedInWinner}
-          />
-        )}
-        {type === "comment" && (
-          <ClaimFlow
-            type="comment"
-            winnerName={MANUAL_WINNERS.comment}
-            expectedUsername={CREDENTIALS.comment.user}
-            expectedPassword={CREDENTIALS.comment.pass}
-            commentText={commentWinner?.text}
-            voucherCode={MANUAL_CODES.comment}
-            onSuccess={setLoggedInWinner}
-          />
-        )}
-      </motion.div>
+      <div className="relative z-10 w-full max-w-xl mx-auto flex flex-col items-center">
+        <img
+          src="/Untitled-2-01.png"
+          alt="Trawbit"
+          className="h-16 md:h-24 mb-10 opacity-90 brightness-0 scale-110"
+        />
+        <h2 className="text-3xl md:text-4xl font-light tracking-tight text-[#050B2B] mb-8 text-center">
+          Official <span className="font-black">Announcement</span>
+        </h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40, filter: "blur(20px)", scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col gap-6 w-full"
+        >
+          {type === "follower" && (
+            <ClaimFlow
+              type="follower"
+              winnerName={MANUAL_WINNERS.follower}
+              expectedUsername={CREDENTIALS.follower.user}
+              expectedPassword={CREDENTIALS.follower.pass}
+              voucherCode={MANUAL_CODES.follower}
+              onSuccess={setLoggedInWinner}
+            />
+          )}
+          {type === "comment" && (
+            <ClaimFlow
+              type="comment"
+              winnerName={MANUAL_WINNERS.comment}
+              expectedUsername={CREDENTIALS.comment.user}
+              expectedPassword={CREDENTIALS.comment.pass}
+              commentText={commentWinner?.text}
+              voucherCode={MANUAL_CODES.comment}
+              onSuccess={setLoggedInWinner}
+            />
+          )}
+        </motion.div>
+      </div>
     </div>
   );
 }
