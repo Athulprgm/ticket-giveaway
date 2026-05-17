@@ -20,12 +20,12 @@ const CREDENTIALS = {
 
 // Manually update these after the random winner is selected
 const MANUAL_WINNERS = {
-  follower: "Follower_Winner_Name", // <--- UPDATE THIS AFTER SELECTION
+  follower: "Sangeeth", // <--- UPDATE THIS AFTER SELECTION
   comment: "Sruthi Santhosh", // <--- UPDATE THIS AFTER SELECTION
 };
 
 const MANUAL_CODES = {
-  follower: "TRWB400", // <--- UPDATE THIS WITH REAL VOUCHER CODE
+  follower: "8H77TZJCQQ", // <--- UPDATE THIS WITH REAL VOUCHER CODE
   comment: "8W94YNC7QQ", // <--- UPDATE THIS WITH REAL VOUCHER CODE
 };
 
